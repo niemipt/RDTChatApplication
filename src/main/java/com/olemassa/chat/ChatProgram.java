@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.olemassa.chat.impl.GoBackNImpl;
 import com.olemassa.chat.impl.ReliableDataTransfer10Impl;
@@ -20,7 +21,7 @@ import com.olemassa.chat.impl.ReliableDataTransfer22Impl;
 import com.olemassa.chat.impl.ReliableDataTransfer30Impl;
 import com.olemassa.chat.impl.SelectiveRepeat;
 
-
+@SpringBootApplication
 public class ChatProgram implements Runnable, Receiver {
 
 	final static Logger logger = LoggerFactory.getLogger(ChatProgram.class);
@@ -281,14 +282,18 @@ public class ChatProgram implements Runnable, Receiver {
 			chatProgram.setRemoteport(Integer.valueOf(args[3]));
 			chatProgram.setProtocol(args[4]);
 		} else {
-			System.out.println("java com.olemassa.chat.ChatProgram [[localhost localport remotehost remoteport] protocol]");
+			System.out.println("Usage:");
+			System.out.println("java -jar target/RDTChatApplication-0.0.1-SNAPSHOT.jar");
+			System.out.println("java -jar target/RDTChatApplication-0.0.1-SNAPSHOT.jar localhost localport remotehost remoteport");
+			System.out.println("java -jar target/RDTChatApplication-0.0.1-SNAPSHOT.jar localhost localport remotehost remoteport protocol");
+			System.exit(1);;
 		}
 		chatProgram.run();
 	}
 
 	@Override
 	public void receive(byte[] request) {
-		logger.trace("receive({})", request);
+		logger.debug("receive({})", request);
 		try{
 			printWriter.println(new String(request));
 		} finally {

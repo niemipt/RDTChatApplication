@@ -1,44 +1,62 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>PeteChatServer</groupId>
-	<artifactId>PeteChatServer</artifactId>
+	
+	<!-- Application things -->
+	<groupId>com.olemassa.opiskelua</groupId>
+	<artifactId>RDTChatApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	
+	<!-- Newer java version -->
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	
+	<!-- Spring boot starter parent for reasonable defaults -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.0.RELEASE</version>
+	</parent>
+	
 	<dependencies>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.13</version>
-		</dependency>
+		<!-- Core starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <!-- Jacksum for crc8 -->
 		<dependency>
 			<groupId>jacksum</groupId>
 			<artifactId>jacksum</artifactId>
 			<version>1.7.0</version>
 		</dependency>
+		<!-- Apache commons lang for ArrayUtils -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<!-- Package as an executable jar -->
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
 	<repositories>
+		<!-- Repository for jacksum -->
 		<repository>
 			<id>filekeys</id>
 			<name>Filekeys Repository</name>
-			<url>http://www.filekeys.com/maven/</url>
+			<url>http://www.filekeys.com/maven/maven/repository</url>
 		</repository>
 	</repositories>
+	
 </project>
